@@ -1,0 +1,13 @@
+
+{% block title %}
+zaloguj użytkownika 
+{% endblock %}
+
+{% block content %}
+    <h1>zaloguj użytkownika</h1>
+    <form class="form-with-validation" action="{% url 'logging' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button class = "form-submit">Potwierdź</button>
+    </form>
+{% endblock %}
