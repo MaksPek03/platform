@@ -1,0 +1,9 @@
+{% block content %}
+<ul> 
+    {% for uwaga in uwagi_list %}
+    <li>{{uwaga.name}}</li>
+    {% endfor %}
+    <a href="{% url 'new' %}">dodaj uwagę</a>
+
+</ul>
+{% endblock %}
