@@ -11,6 +11,11 @@ def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
     return render(request, 'post_detail.html', {'post': post})
 
+
+def uwagi_detail(request, pk):
+    uwaga = Uwaga.objects.get(pk=pk)
+    return render(request, 'uwagi_details.html', {'uwaga': uwaga})
+
 def newPost(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -37,3 +42,6 @@ def new_uwaga(request):
     else:
         form = UwagaForm()
     return render(request, 'new_uwaga.html', {"form": form})
+
+def startpage(request):
+    return render(request, 'startpage.html')
