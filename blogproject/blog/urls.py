@@ -12,6 +12,8 @@ urlpatterns = [
     path('post/<int:pk>/edit/', views.edit_post, name = 'edit_post'),
     path("uwagi/<int:pk>/edit", views.edit_uwaga, name='edit_uwaga'),
     path('uwagi/<int:pk>/delete/', views.delete_uwaga, name='delete_uwaga'), 
-    path('post/<int:pk>/delete', views.delete_post, name='delete_post')
+    path('post/<int:pk>/delete', views.delete_post, name='delete_post'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login_views, name='login')
 
 ]
