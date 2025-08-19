@@ -8,6 +8,10 @@ urlpatterns = [
     path('uwagi/', views.uwagi_list, name='uwagi_list'),
     path('uwagi/new/', views.new_uwaga, name='new'),
     path('', views.startpage, name='startpage'),
-    path('uwagi/<int:pk>/', views.uwagi_detail, name = 'uwagi_detail')
+    path('uwagi/<int:pk>/', views.uwagi_detail, name = 'uwagi_detail'),
+    path('post/<int:pk>/edit/', views.edit_post, name = 'edit_post'),
+    path("uwagi/<int:pk>/edit", views.edit_uwaga, name='edit_uwaga'),
+    path('uwagi/<int:pk>/delete/', views.delete_uwaga, name='delete_uwaga'), 
+    path('post/<int:pk>/delete', views.delete_post, name='delete_post')
 
 ]

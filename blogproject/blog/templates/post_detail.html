@@ -5,4 +5,6 @@
     <p> {{ post.created_at }}</p>
 
 </ul>
+<a href="{% url 'edit_post' post.pk %}">edytuj post</a>
+<a href="{% url 'delete_post' post.pk %}">usun post</a>
 {% endblock %}
