@@ -1,0 +1,8 @@
+{% block content %}
+<p>usun uwage {{uwaga.name}}</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">potwierdz</button>
+</form>
+<a href="{% url 'uwagi_detail' uwaga.pk %}">anuluj</a>
+{% endblock %}

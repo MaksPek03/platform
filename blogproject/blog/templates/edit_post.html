@@ -1,0 +1,10 @@
+{% block content %}
+<p>edytuj post {{post.title}}</p>
+<form method ="post">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">zapisz zmiany</button>
+</form>
+<a href="{% url 'post_detail' post.pk %}">wroc</a>
+
+{% endblock %}

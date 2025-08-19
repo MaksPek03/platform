@@ -1,7 +1,7 @@
 {% block content %}
 <ul> 
     {% for uwaga in uwagi_list %}
-    <li>{{uwaga.name}}</li>
+    <a href = "{% url 'uwagi_detail' uwaga.pk %}"> {{ uwaga.name }}</a>
     {% endfor %}
     <a href="{% url 'new' %}">dodaj uwagę</a>
 
