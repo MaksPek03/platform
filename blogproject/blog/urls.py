@@ -5,13 +5,15 @@ urlpatterns = [
     path('post/', views.post_list, name='post_list'),
     path('post/<int:pk>/', views.post_detail, name = 'post_detail'),
     path('post/new/', views.newPost, name='newPost'),
-    path('uwagi/', views.uwagi_list, name='uwagi_list'),
-    path('uwagi/new/', views.new_uwaga, name='new'),
-    path('', views.startpage, name='startpage'),
-    path('uwagi/<int:pk>/', views.uwagi_detail, name = 'uwagi_detail'),
-    path('post/<int:pk>/edit/', views.edit_post, name = 'edit_post'),
-    path("uwagi/<int:pk>/edit", views.edit_uwaga, name='edit_uwaga'),
-    path('uwagi/<int:pk>/delete/', views.delete_uwaga, name='delete_uwaga'), 
-    path('post/<int:pk>/delete', views.delete_post, name='delete_post')
+    path('post/<int:post_pk>/edit/', views.edit_post, name = 'edit_post'),
+    path('post/<int:post_pk>/delete', views.delete_post, name='delete_post'),
+    path('startpage/', views.startpage, name='startpage'),
+    path('post/<int:post_pk>/uwagi/<int:uwaga_pk>/', views.uwagi_detail, name = 'uwagi_detail'),
+    path('post/<int:post_pk>/uwagi/', views.uwagi_list, name='uwagi_list'),
+    path('post/<int:post_pk>/uwagi/new/', views.new_uwaga, name='new_uwaga'),
+    path("post/<int:post_pk>/uwagi/<int:uwaga_pk>/edit", views.edit_uwaga, name='edit_uwaga'),
+    path('post/<int:post_pk>/uwagi/<int:uwaga_pk>/delete/', views.delete_uwaga, name='delete_uwaga'), 
+    path('register/', views.register, name='register'),
+    path('', views.login_views, name='login')
 
 ]

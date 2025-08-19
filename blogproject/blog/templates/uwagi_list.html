@@ -1,9 +1,10 @@
 {% block content %}
 <ul> 
-    {% for uwaga in uwagi_list %}
-    <a href = "{% url 'uwagi_detail' uwaga.pk %}"> {{ uwaga.name }}</a>
+    {% for uwaga in uwagi %}
+    <a href = "{% url 'uwagi_detail' post.pk uwaga.pk %}"> {{ uwaga.name }}</a>
     {% endfor %}
-    <a href="{% url 'new' %}">dodaj uwagę</a>
+    <a href="{% url 'new_uwaga' post.pk %}">dodaj uwagę</a>
+    <a href="{% url 'post_detail' post.pk %}">Wróć do postu</a>
 
 </ul>
 {% endblock %}

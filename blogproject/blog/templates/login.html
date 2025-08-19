@@ -1,0 +1,8 @@
+{% block content %}
+<form method ="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">potwierdz</button>
+</form>
+<a href ="{% url 'register' %}"> nie masz konta?</a>
+{% endblock %}
