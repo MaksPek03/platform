@@ -7,4 +7,6 @@
 </ul>
 <a href="{% url 'edit_post' post.pk %}">edytuj post</a>
 <a href="{% url 'delete_post' post.pk %}">usun post</a>
+<a href="{% url 'uwagi_list' post.pk %}">zobacz komentarze</a>
+<a href="{% url 'post_list' %}">lista postów</a>
 {% endblock %}

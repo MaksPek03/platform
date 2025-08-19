@@ -4,6 +4,6 @@
 {% csrf_token %}
 {{ form.as_p}}
 <button type="submit">zapisz</button>
-<a href = "{% url 'uwagi_detail' uwaga.pk %}">wroc</a>
+<a href = "{% url 'uwagi_detail' post.pk uwaga.pk %}">wroc</a>
 </form>
 {% endblock %}

@@ -15,9 +15,10 @@ def post_detail(request, pk):
     return render(request, 'post_detail.html', {'post': post})
 
 
-def uwagi_detail(request, pk):
-    uwaga = Uwaga.objects.get(pk=pk)
-    return render(request, 'uwagi_details.html', {'uwaga': uwaga})
+def uwagi_list(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    uwagi = post.uwaga_set.all()
+    return render(request, 'uwagi_list.html', {'post': post, 'uwagi': uwagi})
 
 def newPost(request):
     if request.method == "POST":
@@ -42,38 +43,47 @@ def edit_post(request,pk):
     return render(request, 'edit_post.html', {"form": form, "post": post})
 
 
-def uwagi_list(request):
-    uwagi_list = Uwaga.objects.all()
-    return render(request, 'uwagi_list.html', {'uwagi_list': uwagi_list})
+def uwagi_detail(request, post_pk, uwaga_pk):
+    post = Post.objects.get(pk=post_pk)
+    uwagi = post.uwaga_set.all()
+    uwaga = uwagi.get(pk=uwaga_pk)
+    return render(request, 'uwagi_details.html', {'post':post, 'uwaga': uwaga})
 
-def new_uwaga(request):
+def new_uwaga(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
     if request.method == "POST":
         form = UwagaForm(request.POST)
         if form.is_valid():
             uwaga = form.save(commit=False)
+            uwaga.post = post
             uwaga.save()
-            return redirect('uwagi_list')
+            return redirect('uwagi_list', post_pk=post_pk)
     else:
         form = UwagaForm()
     return render(request, 'new_uwaga.html', {"form": form})
 
-def edit_uwaga(request, pk):
-    uwaga = Uwaga.objects.get(pk=pk)
+def edit_uwaga(request, post_pk, uwaga_pk):
+    post = Post.objects.get(pk=post_pk)
+    uwagi = post.uwaga_set.all()
+    uwaga = uwagi.get(pk=uwaga_pk)
     if request.method == "POST":
         form = UwagaForm(request.POST, instance = uwaga)
         if form.is_valid():
             form.save()
-            return redirect('uwagi_detail', pk=uwaga.pk)
+            return redirect('uwagi_detail', post_pk = post_pk, uwaga_pk=uwaga_pk)
     else:
         form = UwagaForm(instance=uwaga)
-    return render(request, 'edit_uwaga.html', {'form': form, 'uwaga': uwaga})
+    return render(request, 'edit_uwaga.html', {'form': form, 'post': post, 'uwaga': uwaga})
 
-def delete_uwaga(request, pk):
-    uwaga = Uwaga.objects.get(pk=pk)
+def delete_uwaga(request, post_pk, uwaga_pk):
+    post = Post.objects.get(pk=post_pk)
+    uwaga = Uwaga.objects.get(pk=uwaga_pk)
     if request.method == "POST":
         uwaga.delete()
-        return redirect('uwagi_list')
-    return render(request, 'delete_uwaga.html', {'uwaga': uwaga})
+        return redirect('uwagi_list', post_pk = post_pk)
+    return render(request, 'delete_uwaga.html', {'post': post, 'uwaga': uwaga})
+
+
 def delete_post(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == "POST":

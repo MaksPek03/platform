@@ -13,3 +13,4 @@ class Uwaga(models.Model):
     name = models.CharField(max_length=50)
     content = models.TextField()
     severity = models.IntegerField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)

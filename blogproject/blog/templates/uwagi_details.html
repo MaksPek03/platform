@@ -3,6 +3,6 @@
     <p>{{uwaga.name}}</p>
     <p>{{uwaga.content}}</p>
 </ul>
-<a href="{% url 'edit_uwaga' uwaga.pk %}">edytuj </a>
-<a href="{% url 'delete_uwaga' uwaga.pk %}">usun</a>
+<a href="{% url 'edit_uwaga' post.pk uwaga.pk %}">edytuj </a>
+<a href="{% url 'delete_uwaga' post.pk uwaga.pk %}">usun</a>
 {% endblock %}
