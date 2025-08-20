@@ -1,8 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Rejestracja{% endblock %}
+
 {% block content %}
+<div class="form-container">
+<h2>Zarejestruj się</h2>
 <form method="POST">
     {%csrf_token %}
-    {{form}}
-<button type="submit">potwierdz</button>
+    {{form.as_p}}
+<button type="submit" class="btn">Potwierdz</button>
 </form>
-<a href="{% url 'login' %}">masz konto?</a>
+<p class="form-link">
+    Masz konto? <a href="{% url 'login' %}">Zaloguj się?</a>
+</p>
+</div>
 {% endblock %}

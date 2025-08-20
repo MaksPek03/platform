@@ -1,8 +1,12 @@
+{% extends 'base.html' %}
 {% block content %}
+<div class="form-container">
 <form method ="POST">
     {% csrf_token %}
     {{ form }}
-    <button type="submit">potwierdz</button>
+    <button type="submit" class="btn">potwierdz</button>
 </form>
+<p class="form-link">
 <a href ="{% url 'register' %}"> nie masz konta?</a>
+</p></div>
 {% endblock %}

@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Blog{% endblock %}</title>
+        <link rel='stylesheet' href="{% static 'blog/css/style.css' %}">
+    </head>
+    <body>
+        <nav>
+            <ul class="menu">
+                <li><a href="{% url 'post_list' %}">posty</a></li>
+                <li><a href="{% url 'about_me' %}">o mnie</a></li>
+                <li><a href="{% url 'contact' %}">kontakt</a></li>
+                <li><a href="{% url 'login' %}">zaloguj się</a></li>
+                <li><a href="{% url 'register' %}">zarejestruj się</a></li>
+            </ul>
+        </nav>  
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>  
+    </body>
+</html>
