@@ -1,0 +1,26 @@
+.menu {
+    list-style: none; 
+    display: flex; 
+    gap: 20px;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 8px;
+}
+.menu li a{
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+menu li a:hover{
+    background-color: #555;
+}
+
+@media (max_width: 600px){
+    .menu{
+        flex-direction:column;
+        gap:10px;
+    }
+}
