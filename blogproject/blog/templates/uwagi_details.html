@@ -5,4 +5,5 @@
 </ul>
 <a href="{% url 'edit_uwaga' post.pk uwaga.pk %}">edytuj </a>
 <a href="{% url 'delete_uwaga' post.pk uwaga.pk %}">usun</a>
+<a href="{% url 'uwagi_list' post.pk %}">wroc do komentarzy</a>
 {% endblock %}

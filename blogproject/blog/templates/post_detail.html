@@ -1,10 +1,20 @@
 {% block content %}
 <ul> 
     <p> {{ post.title }}</p>
+    {% if post.image %}
+    <img src="{{ post.image.url }}" alt="okładka" style="max-width : 600px; height: auto;">
+    {% endif %}
     <p> {{ post.content }}</p>
     <p> {{ post.created_at }}</p>
 
 </ul>
+<p>kategoria:
+{% if post.tag %}
+    <a href="{% url 'tag_posts' post.tag.pk %}">{{post.tag.name}}</a>
+{% else %}
+brak
+{% endif %}
+</p>
 <a href="{% url 'edit_post' post.pk %}">edytuj post</a>
 <a href="{% url 'delete_post' post.pk %}">usun post</a>
 <a href="{% url 'uwagi_list' post.pk %}">zobacz komentarze</a>

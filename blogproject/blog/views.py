@@ -1,14 +1,20 @@
 from django.shortcuts import render, redirect
-from .models import Post, Uwaga
+from .models import Post, Uwaga, Tag
 from .forms import PostForm, UwagaForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+
 
 # Create your views here.
 def post_list(request):
-    post_list = Post.objects.all()
-    return render(request, 'post_list.html', {"post_list": post_list})
+    post_list = Post.objects.all().order_by("-created_at")
+    paginator = Paginator(post_list, 5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'post_list.html', {"page_obj": page_obj})
 
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
@@ -18,8 +24,10 @@ def post_detail(request, pk):
 def uwagi_list(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     uwagi = post.uwaga_set.all()
-    return render(request, 'uwagi_list.html', {'post': post, 'uwagi': uwagi})
+    uwagi_count = uwagi.count()
+    return render(request, 'uwagi_list.html', {'post': post, 'uwagi': uwagi, 'uwagi_count': uwagi_count})
 
+@login_required
 def newPost(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -31,6 +39,7 @@ def newPost(request):
         form = PostForm()
     return render(request, 'newPost.html', {'form': form})
 
+@login_required
 def edit_post(request,pk):
     post = Post.objects.get(pk=pk)
     if request.method == "POST":
@@ -49,6 +58,7 @@ def uwagi_detail(request, post_pk, uwaga_pk):
     uwaga = uwagi.get(pk=uwaga_pk)
     return render(request, 'uwagi_details.html', {'post':post, 'uwaga': uwaga})
 
+@login_required
 def new_uwaga(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     if request.method == "POST":
@@ -62,6 +72,7 @@ def new_uwaga(request, post_pk):
         form = UwagaForm()
     return render(request, 'new_uwaga.html', {"form": form})
 
+@login_required
 def edit_uwaga(request, post_pk, uwaga_pk):
     post = Post.objects.get(pk=post_pk)
     uwagi = post.uwaga_set.all()
@@ -75,6 +86,7 @@ def edit_uwaga(request, post_pk, uwaga_pk):
         form = UwagaForm(instance=uwaga)
     return render(request, 'edit_uwaga.html', {'form': form, 'post': post, 'uwaga': uwaga})
 
+@login_required
 def delete_uwaga(request, post_pk, uwaga_pk):
     post = Post.objects.get(pk=post_pk)
     uwaga = Uwaga.objects.get(pk=uwaga_pk)
@@ -83,7 +95,7 @@ def delete_uwaga(request, post_pk, uwaga_pk):
         return redirect('uwagi_list', post_pk = post_pk)
     return render(request, 'delete_uwaga.html', {'post': post, 'uwaga': uwaga})
 
-
+@login_required
 def delete_post(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == "POST":
@@ -93,6 +105,7 @@ def delete_post(request, pk):
 
 def startpage(request):
     return render(request, 'startpage.html')
+
 
 def register(request):
     if request.method == "POST":
@@ -118,3 +131,13 @@ def login_views(request):
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {"form": form})
+
+def about_me(request):
+    return render(request, 'about_me.html')
+def contact(request):
+    return render(request, 'contact.html')
+
+def post_by_tag(request, tag_id):
+    tag = Tag.objects.get(pk=tag_id)
+    posts = tag.posts.all().order_by("-created_at")
+    return render(request, 'tag_posts.html', {"tag": tag, "posts": posts})
