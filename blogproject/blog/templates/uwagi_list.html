@@ -1,5 +1,6 @@
 {% block content %}
 <ul> 
+    <p> Liczba komentarzy: {{ uwagi_count}} </p>
     {% for uwaga in uwagi %}
     <a href = "{% url 'uwagi_detail' post.pk uwaga.pk %}"> {{ uwaga.name }}</a>
     {% endfor %}

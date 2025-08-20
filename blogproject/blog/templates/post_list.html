@@ -1,10 +1,27 @@
 {% block content %}
 <ul>
-    {% for post in post_list %}
+    {% for post in page_obj %}
     <li>
-        <a href = "{% url 'post_detail' post.pk %}"> {{ post.title }}</a>
+        <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+        <small>{{ post.created_at }}</small>
     </li>
+    {% empty %}
+    <p>brak postów</p>
     {% endfor %}
-    <a href = "{% url 'newPost' %}">dodaj nowy post</a>
+    <a href="{% url 'newPost' %}">dodaj nowy post</a>
 </ul>
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page=1">pierwsza strona</a>
+        <a href="?page={{ page_obj.previous_page_number }}">poprzednia strona</a>
+    {% endif %}
+
+    <span>strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">następna strona</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">ostatnia</a>
+    {% endif %}
+</div>
 {% endblock %}
