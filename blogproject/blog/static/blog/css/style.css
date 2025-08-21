@@ -6,6 +6,14 @@
     padding: 10px;
     border-radius: 8px;
 }
+
+.post_list{
+    list-style:none;
+}
+.post_list li a{
+    color: white;
+    text-decoration:none;
+}
 .menu li a{
     color: white;
     text-decoration: none;

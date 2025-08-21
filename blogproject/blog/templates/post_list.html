@@ -1,16 +1,20 @@
+{% extends 'base.html' %}
 {% block content %}
-<ul>
-    {% for post in page_obj %}
-    <li>
-        <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
-        <small>{{ post.created_at }}</small>
-    </li>
-    {% empty %}
-    <p>brak postów</p>
-    {% endfor %}
-    <a href="{% url 'newPost' %}">dodaj nowy post</a>
-</ul>
-
+<div>
+<nav>
+    <ul class="post_list">
+        {% for post in page_obj %}
+        <li>
+            <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+            <small>{{ post.created_at }}</small>
+        </li>
+        {% empty %}
+        <p>brak postów</p>
+        {% endfor %}
+        <a href="{% url 'newPost' %}">dodaj nowy post</a>
+    </ul>
+</nav>
+</div>
 <div class="pagination">
     {% if page_obj.has_previous %}
         <a href="?page=1">pierwsza strona</a>
